@@ -19,6 +19,11 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Set version dynamically
+        run: |
+          VERSION=${{ github.ref_name }}
+          mvn versions:set -DnewVersion=${VERSION}
+
       - name: Build with Maven
         run: mvn clean install --batch-mode
 
