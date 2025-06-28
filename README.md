@@ -1,5 +1,6 @@
 # genArt
 
+![CI](https://github.com/izlatkin/genArt/actions/workflows/ci.yml/badge.svg)
 
 # Build
 ```mvn clean package```
