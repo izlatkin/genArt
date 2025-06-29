@@ -23,4 +23,12 @@ class GenArtControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("Hello, GenArt!"));
     }
+
+    @Test
+    public void testInfoEndpoint() throws Exception {
+        mockMvc.perform(get("/info"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("Application started at:")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("Version:")));
+    }
 }
