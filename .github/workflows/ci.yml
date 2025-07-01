@@ -30,8 +30,11 @@ jobs:
       - name: Run tests
         run: mvn test
 
+      - name: List target contents
+        run: ls -lh target
+
       - name: Archive JAR file
-        run: mv target/genart-0.0.1-SNAPSHOT.jar genart.jar
+        run: mv target/genart*.jar genart.jar
 
   deploy:
     needs: build
