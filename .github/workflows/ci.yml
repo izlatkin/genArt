@@ -34,7 +34,13 @@ jobs:
         run: ls -lh target
 
       - name: Archive JAR file
-        run: mv target/genart*.jar genart.jar
+        run: mv target/genart-0.0.1-SNAPSHOT.jar genart.jar
+
+      - name: Upload JAR file as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: genart-jar
+          path: genart.jar
 
   deploy:
     needs: build
@@ -43,6 +49,11 @@ jobs:
     steps:
       - name: List target contents
         run: pwd
+
+      - name: Download JAR file artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: genart-jar
 
       - name: List target contents
         run: ls -lh genart.jar
