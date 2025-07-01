@@ -41,6 +41,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: List target contents
+        run: pwd
+
+      - name: List target contents
+        run: ls -lh genart.jar
+
       - name: Copy JAR file to AWS EC2
         uses: appleboy/scp-action@v0.1.1
         with:
