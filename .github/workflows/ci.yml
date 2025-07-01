@@ -39,7 +39,7 @@ jobs:
 
     steps:
       - name: Copy JAR file to AWS EC2
-        uses: appleboy/scp-action@v0.2.0
+        uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USERNAME }}
@@ -48,7 +48,7 @@ jobs:
           target: /home/${{ secrets.AWS_USERNAME }}/artgen/genart.jar
 
       - name: Run application on AWS EC2
-        uses: appleboy/ssh-action@v0.1.5
+        uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USERNAME }}
