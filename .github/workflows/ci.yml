@@ -38,9 +38,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Copy file via SSH
-        uses: appleboy/scp-action@v1
+      - name: Copy JAR file to AWS EC2
+        uses: appleboy/scp-action@v0.1.1
         with:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USERNAME }}
@@ -49,7 +48,7 @@ jobs:
           target: /home/${{ secrets.AWS_USERNAME }}/artgen/genart.jar
 
       - name: Run application on AWS EC2
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
         with:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USERNAME }}
