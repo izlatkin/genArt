@@ -58,12 +58,15 @@ jobs:
       - name: List target contents
         run: ls -lh genart.jar
 
+      - name: Decode PEM key
+        run: echo "${{ secrets.AWS_SSH_KEY }}" | base64 --decode > id_rsa && chmod 600 id_rsa
+
       - name: Copy JAR file to AWS EC2
         uses: appleboy/scp-action@v0.1.1
         with:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USERNAME }}
-          key: ${{ secrets.AWS_SSH_KEY }}
+          key: id_rsa
           source: genart.jar
           target: /home/${{ secrets.AWS_USERNAME }}/artgen/genart.jar
 
