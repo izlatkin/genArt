@@ -29,3 +29,30 @@ jobs:
 
       - name: Run tests
         run: mvn test
+
+      - name: Archive JAR file
+        run: mv target/genart-0.0.1-SNAPSHOT.jar genart.jar
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Copy JAR file to AWS EC2
+        uses: appleboy/scp-action@v0.2.0
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USERNAME }}
+          key: ${{ secrets.AWS_SSH_KEY }}
+          source: genart.jar
+          target: /home/${{ secrets.AWS_USERNAME }}/artgen/genart.jar
+
+      - name: Run application on AWS EC2
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USERNAME }}
+          key: ${{ secrets.AWS_SSH_KEY }}
+          script: |
+            pkill -f "genart.jar" || true
+            nohup java -jar /home/${{ secrets.AWS_USERNAME }}/artgen/genart.jar > app.log 2>&1 &
