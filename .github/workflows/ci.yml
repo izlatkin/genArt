@@ -37,7 +37,7 @@ jobs:
         run: mv target/genart-0.0.1-SNAPSHOT.jar genart.jar
 
       - name: Upload JAR file as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: genart-jar
           path: genart.jar
@@ -51,7 +51,7 @@ jobs:
         run: pwd
 
       - name: Download JAR file artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: genart-jar
 
