@@ -34,13 +34,13 @@ jobs:
         run: ls -lh target
 
       - name: Archive JAR file
-        run: mv target/genart-0.0.1-SNAPSHOT.jar genart.jar
+        run: mv target/genart-0.0.1-SNAPSHOT.jar .
 
       - name: Upload JAR file as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: genart-jar
-          path: genart.jar
+          name: genart-0.0.1-SNAPSHOT.jar
+          path: genart-0.0.1-SNAPSHOT.jar
 
   deploy:
     needs: build
@@ -53,10 +53,10 @@ jobs:
       - name: Download JAR file artifact
         uses: actions/download-artifact@v4
         with:
-          name: genart-jar
+          name: genart-0.0.1-SNAPSHOT.jar
 
       - name: List target contents
-        run: ls -lh genart.jar
+        run: ls -lh genart-0.0.1-SNAPSHOT.jar
 
       - name: Copy JAR file to AWS EC2
         uses: appleboy/scp-action@v0.1.5
@@ -75,4 +75,4 @@ jobs:
           key: ${{ secrets.AWS_SSH_KEY }}
           script: |
             pkill -f "genart.jar" || true
-            nohup java -jar /home/${{ secrets.AWS_USERNAME }}/artgen/genart.jar > app.log 2>&1 &
+            nohup java -jar /home/${{ secrets.AWS_USERNAME }}/artgen/genart-*.jar > app.log 2>&1 &
