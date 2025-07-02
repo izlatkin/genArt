@@ -75,4 +75,4 @@ jobs:
           key: ${{ secrets.AWS_SSH_KEY }}
           script: |
             pkill -f "genart.jar" || true
-            nohup java -jar /home/${{ secrets.AWS_USERNAME }}/artgen/genart-*.jar > app.log 2>&1 &
+            nohup java -jar ~/artgen/genart-0.*.jar > app.log 2>&1 &
