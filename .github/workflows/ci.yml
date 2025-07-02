@@ -59,7 +59,7 @@ jobs:
         run: ls -lh genart.jar
 
       - name: Copy JAR file to AWS EC2
-        uses: appleboy/scp-action@v0.1.1
+        uses: appleboy/scp-action@v0.1.5
         with:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USERNAME }}
