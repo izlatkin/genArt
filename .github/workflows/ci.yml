@@ -65,7 +65,7 @@ jobs:
           username: ${{ secrets.AWS_USERNAME }}
           key: ${{ secrets.AWS_SSH_KEY }}
           source: genart-0.0.1-SNAPSHOT.jar
-          target: /home/${{ secrets.AWS_USERNAME }}/artgen/genart-0.0.1-SNAPSHOT.jar
+          target: /home/${{ secrets.AWS_USERNAME }}/artgen/
 
       - name: Run application on AWS EC2
         uses: actions/checkout@v4
