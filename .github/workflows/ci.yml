@@ -73,7 +73,9 @@ jobs:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USERNAME }}
           key: ${{ secrets.AWS_SSH_KEY }}
-          script: set +m; pkill -f "genart" || true
+          script: | 
+            set +m
+            pkill -f "genart" || true
 
       - name: Run application on AWS EC2
         uses: appleboy/ssh-action@v1
@@ -81,4 +83,6 @@ jobs:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USERNAME }}
           key: ${{ secrets.AWS_SSH_KEY }}
-          script: nohup java -jar ~/artgen/genart-0.*.jar > app.log 2>&1 &
+          script: |
+            set +m
+            nohup java -jar ~/artgen/genart-0.*.jar > app.log 2>&1 &
