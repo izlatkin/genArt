@@ -73,6 +73,4 @@ jobs:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USERNAME }}
           key: ${{ secrets.AWS_SSH_KEY }}
-          script: |
-            pkill -f "genart" || true
-            java -jar ~/artgen/genart-0.*.jar > app.log 2>&1 &
+          script: java -jar ~/artgen/genart-0.*.jar > app.log 2>&1 &
