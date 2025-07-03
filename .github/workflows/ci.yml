@@ -68,7 +68,7 @@ jobs:
           target: /home/${{ secrets.AWS_USERNAME }}/artgen/
 
       - name: Run application on AWS EC2
-        uses: actions/checkout@v4
+        uses: appleboy/ssh-action@v0.1.5
         with:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USERNAME }}
