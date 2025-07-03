@@ -67,22 +67,10 @@ jobs:
           source: genart-0.0.1-SNAPSHOT.jar
           target: /home/${{ secrets.AWS_USERNAME }}/artgen/
 
-      - name: Stop previous version on AWS EC2
+      - name: Stop previous version and Run new on AWS EC2
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USERNAME }}
           key: ${{ secrets.AWS_SSH_KEY }}
-          script: | 
-            set +m
-            pkill -f "genart" || true
-
-      - name: Run application on AWS EC2
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.AWS_HOST }}
-          username: ${{ secrets.AWS_USERNAME }}
-          key: ${{ secrets.AWS_SSH_KEY }}
-          script: |
-            set +m
-            nohup java -jar ~/artgen/genart-0.*.jar > app.log 2>&1 &
+          script: ~/artgen/deploy.sh
