@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenArt Landing Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .upload-section, .button-section {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Welcome to GenArt</h1>
+
+    <div class="upload-section">
+        <label for="imageUpload">Upload an Image:</label>
+        <input type="file" id="imageUpload" name="imageUpload" accept="image/*">
+    </div>
+
+    <div class="button-section">
+        <button id="helloButton">Say Hello</button>
+    </div>
+
+    <div id="response" style="margin-top: 20px; color: green;"></div>
+</div>
+
+<script>
+    document.getElementById('helloButton').addEventListener('click', async () => {
+        try {
+            const response = await fetch('/hello');
+            const text = await response.text();
+            document.getElementById('response').innerText = text;
+        } catch (error) {
+            document.getElementById('response').innerText = 'Error: Unable to connect to the server.';
+        }
+    });
+</script>
+</body>
+</html>
